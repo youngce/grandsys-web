@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" namespace="Grandsys.Wfm.ReadSide.Outsource" assembly="Grandsys.Wfm.ReadSide.Outsource">
+
+  <class name="EvaluationItem">
+    <id name="Id" column="EvaluationItemId"/>
+    <property name="Name"/>
+    <property name="StatisticalWay"/>
+  </class>
+</hibernate-mapping>
