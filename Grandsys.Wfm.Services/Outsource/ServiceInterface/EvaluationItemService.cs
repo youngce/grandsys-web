@@ -5,7 +5,7 @@ using System.Web;
 using ENode.Commanding;
 using ENode.Domain;
 using Grandsys.Wfm.Services.Outsource.ServiceModel;
-using Grandsys.Wfm.Backend.Outsource.Commands;
+
 using NHibernate;
 using DeleteEvaluationItem = Grandsys.Wfm.Services.Outsource.ServiceModel.DeleteEvaluationItem;
 
@@ -59,6 +59,8 @@ namespace Grandsys.Wfm.Services.Outsource.ServiceInterface
             using (var session = _sessionFactory.OpenSession())
             {
                 var obj = session.Get<ReadSide.Outsource.EvaluationItem>(new Guid(id));
+                if (obj == null)
+                    throw new Exception(string.Format("The evaluationItem '{0}' is not exist.", id));
                 var response = new EvaluationItem
                 {
                     Id = request.Id,
@@ -69,18 +71,14 @@ namespace Grandsys.Wfm.Services.Outsource.ServiceInterface
 
                 if (request.Mode == "read")
                 {
-                    response.Links = new[]
-                    {
-                        new Link { Name = "DELETE", Method = "DELETE", Request = new DeleteEvaluationItem {Id = id} },
-                        new Link {Name = "Edit", Method = "GET", Request = new GetEvaluationItem {Id = id, Mode = "edit"}}
-                    };
+                    AsReadMode(response);
                 }
                 else if (request.Mode == "edit")
                 {
                     response.SetFormulaOptions = new[] { LinearFormula(request.Id), SlideFormula(request.Id) };
                     response.Links = new[]
                     {
-                         new Link { Name ="Update",  Method = "PUT", Request = new UpdateEvaluationItem { Id = id, Name = obj.Name, Status = "inuse" } },
+                         new Link { Name ="Update",  Method = "PUT"},
                          new Link { Name ="Discard",  Method = "GET", Request = new GetEvaluationItem { Id = id, Mode = "read"} }
                     };
                 }
@@ -88,10 +86,21 @@ namespace Grandsys.Wfm.Services.Outsource.ServiceInterface
             }
         }
 
+        private static EvaluationItem AsReadMode(EvaluationItem obj)
+        {
+            var id = obj.Id;
+            obj.Links = new[]
+                    {
+                        new Link { Name = "DELETE", Method = "DELETE", Request = new DeleteEvaluationItem {Id = id, Name = obj.Name } },
+                        new Link {Name = "Edit", Method = "GET", Request = new GetEvaluationItem {Id = id, Mode = "edit"}}
+                    };
+            return obj;
+        }
+
         public object Post(RatioEvaluationItem request)
         {
             var evaluationItemId = Guid.NewGuid();
-            _commandService.Send(new CreateRatioEvaluationItem { EvaluationItemId = evaluationItemId, Name = request.Name });
+            _commandService.Send(new Grandsys.Wfm.Backend.Outsource.Commands.CreateRatioEvaluationItem { EvaluationItemId = evaluationItemId, Name = request.Name });
 
             var response = CreateEvaluationItem(evaluationItemId.ToString());
             response.Name = request.Name;
@@ -102,7 +111,7 @@ namespace Grandsys.Wfm.Services.Outsource.ServiceInterface
         public object Post(PieceEvaluationItem request)
         {
             var evaluationItemId = Guid.NewGuid();
-            _commandService.Send(new CreatePieceEvaluationItem { EvaluationItemId = evaluationItemId, Name = request.Name });
+            _commandService.Send(new Grandsys.Wfm.Backend.Outsource.Commands.CreatePieceEvaluationItem { EvaluationItemId = evaluationItemId, Name = request.Name });
 
             var response = CreateEvaluationItem(evaluationItemId.ToString());
             response.Name = request.Name;
@@ -116,7 +125,7 @@ namespace Grandsys.Wfm.Services.Outsource.ServiceInterface
             {
                 Id = evaluationItemId,
                 SetFormulaOptions = new[] { LinearFormula(evaluationItemId), SlideFormula(evaluationItemId) },
-                Links = new[] { new Link{ Name ="NEXT" , Method = "GET", Request = new GetEvaluationItem(){ Id = evaluationItemId, Mode ="edit" } }}
+                Links = new[] { new Link { Name = "NEXT", Method = "GET", Request = new GetEvaluationItem() { Id = evaluationItemId, Mode = "edit" } } }
             };
         }
 
@@ -140,14 +149,16 @@ namespace Grandsys.Wfm.Services.Outsource.ServiceInterface
             };
         }
 
-        public object Put(UpdateEvaluationItem rquest)
+        public object Put(EnableEvaluationItem request)
         {
-            if (rquest.Status == "inuse")
+            var result = _commandService.Execute(new Grandsys.Wfm.Backend.Outsource.Commands.EnableEvaluationItem { ItemId = new Guid(request.Id) });
+            if (result.IsCompleted)
             {
-                return Get(new GetEvaluationItem { Id = rquest.Id, Mode = "read" });
+                //return new EvaluationItem { Id = request.Id };
+                return null;
             }
-
-            return new EvaluationItem { Name = rquest.Name, Status = "inuse" };
+            else
+                throw result.ErrorInfo.Exception;
         }
 
         public object Any(SlideFormula request)
@@ -163,20 +174,20 @@ namespace Grandsys.Wfm.Services.Outsource.ServiceInterface
 
         public object Delete(ServiceModel.DeleteEvaluationItem request)
         {
-            using (var session = _sessionFactory.OpenSession())
+            var result = _commandService.Execute(new Grandsys.Wfm.Backend.Outsource.Commands.DeleteEvaluationItem { ItemId = new Guid(request.Id) });
+            if (result.IsCompleted)
             {
-                var obj = session.Get<ReadSide.Outsource.EvaluationItem>(new Guid(request.Id));
-
                 return new EvaluationItem
                 {
                     Id = request.Id,
-                    Name = obj.Name,
+                    Name = request.Name,
                     Status = "deleted",
                     Links = new[]{ 
-                    new Link{ Name ="Undo", Method = "PUT", Request = new UpdateEvaluationItem{ Id = request.Id, Status = "inuse" }}}
+                    new Link{ Name ="Undo", Method = "PUT", Request = new EnableEvaluationItem { Id = request.Id }}}
                 };
-
             }
+            else
+                throw result.ErrorInfo.Exception;
         }
     }
 }

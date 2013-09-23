@@ -173,17 +173,19 @@ namespace Grandsys.Wfm.Backend.Outsource.Domain
 
     [Serializable]
     public class EvaluationItem : AggregateRoot<Guid>
-        , IEventHandler<EvaluationItemCreated>, IEventHandler<EvaluationItemDeleted>
+        , IEventHandler<EvaluationItemCreated>, IEventHandler<EvaluationItemAvailability>
     {
         private Formula _formula;
-        
+        private string _statisticalWay;
+        private string _name;
+        private bool _inuse;
 
         public EvaluationItem() { }
 
         public EvaluationItem(Guid evaluationItemId, string name, string statisticalWay)
             : base(evaluationItemId)
         {
-            if(string.IsNullOrWhiteSpace(name))
+            if (string.IsNullOrWhiteSpace(name))
                 throw new ArgumentException("name can not be null or whiteSpace");
 
             RaiseEvent(new EvaluationItemCreated(evaluationItemId, name, statisticalWay));
@@ -191,6 +193,9 @@ namespace Grandsys.Wfm.Backend.Outsource.Domain
 
         void IEventHandler<EvaluationItemCreated>.Handle(EvaluationItemCreated evnt)
         {
+            _inuse = true;
+            _name = evnt.Name;
+            _statisticalWay = evnt.StatisticalWay;
             _formula = StatisticalWay.By(evnt.StatisticalWay);
         }
 
@@ -199,9 +204,25 @@ namespace Grandsys.Wfm.Backend.Outsource.Domain
             //_formula.SetGradeSteps(gradeSteps);
         }
 
-        void IEventHandler<EvaluationItemDeleted>.Handle(EvaluationItemDeleted evnt)
+        public void Disable()
         {
-            throw new NotImplementedException();
+            if (!_inuse)
+                throw new Exception(string.Format("The item '{0}' is already disabled.", _name));
+
+            RaiseEvent(new EvaluationItemAvailability(Id, false));
+        }
+
+        public void Enable()
+        {
+            if(_inuse)
+                throw new Exception(string.Format("The item '{0}' is already enabled.", _name));
+
+            RaiseEvent(new EvaluationItemAvailability(Id, _name, _statisticalWay));
+        }
+
+        void IEventHandler<EvaluationItemAvailability>.Handle(EvaluationItemAvailability evnt)
+        {
+            _inuse = evnt.Inuse;
         }
     }
 }

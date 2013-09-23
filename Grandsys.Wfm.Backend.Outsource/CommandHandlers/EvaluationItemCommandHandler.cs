@@ -13,7 +13,8 @@ namespace Grandsys.Wfm.Backend.Outsource.CommandHandlers
     public class EvaluationItemCommandHandler :
         ICommandHandler<CreatePieceEvaluationItem>,
         ICommandHandler<CreateRatioEvaluationItem>,
-        ICommandHandler<SetLinearFormula>
+        ICommandHandler<SetLinearFormula>,
+        ICommandHandler<DeleteEvaluationItem>, ICommandHandler<EnableEvaluationItem>
     {
         void ICommandHandler<CreatePieceEvaluationItem>.Handle(ICommandContext context, CreatePieceEvaluationItem command)
         {   
@@ -30,8 +31,18 @@ namespace Grandsys.Wfm.Backend.Outsource.CommandHandlers
         {
             var obj = context.Get<EvaluationItem>(command.EvaluationItemId);
             
-            
+        }
+        
+        void ICommandHandler<DeleteEvaluationItem>.Handle(ICommandContext context, DeleteEvaluationItem command)
+        {
+            var obj = context.Get<EvaluationItem>(command.ItemId);
+            obj.Disable();
+        }
 
+        void ICommandHandler<EnableEvaluationItem>.Handle(ICommandContext context, EnableEvaluationItem command)
+        {
+            var obj = context.Get<EvaluationItem>(command.ItemId);
+            obj.Enable();
         }
     }
 

@@ -17,7 +17,7 @@ namespace Grandsys.Wfm.ReadSide.Outsource
     }
 
     [Component]
-    public class EvaluationItemEventHandler : IEventHandler<EvaluationItemCreated>, IEventHandler<EvaluationItemDeleted>
+    public class EvaluationItemEventHandler : IEventHandler<EvaluationItemCreated>, IEventHandler<EvaluationItemAvailability>
     {
         private readonly ISessionFactory _sessionFactory;
 
@@ -30,7 +30,7 @@ namespace Grandsys.Wfm.ReadSide.Outsource
         {
             using (var session = _sessionFactory.OpenSession())
             {
-                
+
                 session.Save(new EvaluationItem
                 {
                     Id = evnt.EvaluationItemId,
@@ -41,11 +41,22 @@ namespace Grandsys.Wfm.ReadSide.Outsource
             }
         }
 
-        void IEventHandler<EvaluationItemDeleted>.Handle(EvaluationItemDeleted evnt)
+        void IEventHandler<EvaluationItemAvailability>.Handle(EvaluationItemAvailability evnt)
         {
             using (var session = _sessionFactory.OpenSession())
             {
-                session.Delete(evnt.EvaluationItemId);
+                if (evnt.Inuse)
+                {
+                    session.Save(new EvaluationItem
+                    {
+                        Id = evnt.EvaluationItemId,
+                        Name = evnt.Name,
+                        StatisticalWay = evnt.StatisticalWay
+                    });
+                }
+                else
+                    session.Delete(session.Load<EvaluationItem>(evnt.EvaluationItemId));
+                    
                 session.Flush();
             }
         }

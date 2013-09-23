@@ -15,4 +15,10 @@ namespace Grandsys.Wfm.Backend.Outsource.Commands
     {
         public Guid ItemId { get; set; }
     }
+
+    [Serializable]
+    public class EnableEvaluationItem : Command
+    {
+        public Guid ItemId { get; set; }
+    }
 }

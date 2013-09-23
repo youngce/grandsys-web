@@ -39,17 +39,19 @@ namespace Grandsys.Wfm.Services.Outsource.ServiceModel
     }
     
     [Route("/evaluationItems/{Id}", "PUT")]
-    public class UpdateEvaluationItem : IReturn
+    public class EnableEvaluationItem : IReturn
     {
         public string Id { get; set; }
         public string Name { get; set; }
-        public string Status { get; set; }
     }
+
+    
 
     [Route("/evaluationItems/{Id}", "DELETE")]
     public class DeleteEvaluationItem : IReturn<EvaluationItem>
     {
         public string Id { get; set; }
+        public string Name { get; set; }
     }
 
     [Route("/evaluationItems/ratio", "POST")]

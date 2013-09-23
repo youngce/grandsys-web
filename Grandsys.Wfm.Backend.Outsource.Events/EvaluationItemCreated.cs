@@ -24,12 +24,27 @@ namespace Grandsys.Wfm.Backend.Outsource.Events
     }
 
     [Serializable]
-    public class EvaluationItemDeleted : Event
+    public class EvaluationItemAvailability : Event
     {
-        public EvaluationItemDeleted(Guid id)
+        public EvaluationItemAvailability() { }
+
+        public EvaluationItemAvailability(Guid id, bool inuse)
         {
             EvaluationItemId = id;
+            Inuse = inuse;
         }
+
+        public EvaluationItemAvailability(Guid id, string name, string statisticalWay) :this(id, true)
+        {
+            Name = name;
+            StatisticalWay = statisticalWay;
+        }
+
+        public string StatisticalWay { get; private set; }
+
+        public string Name { get; private set; }
+
+        public bool Inuse { get; private set; }
 
         public Guid EvaluationItemId { get; private set; }
     }
