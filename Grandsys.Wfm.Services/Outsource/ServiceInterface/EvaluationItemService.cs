@@ -56,34 +56,31 @@ namespace Grandsys.Wfm.Services.Outsource.ServiceInterface
         {
             var id = request.Id;
 
-            using (var session = _sessionFactory.OpenSession())
+            var obj = _memoryCache.Get<Backend.Outsource.Domain.EvaluationItem>(new Guid(id));
+            if (obj == null)
+                throw new Exception(string.Format("The evaluationItem '{0}' is not exist.", id));
+            var response = new EvaluationItem
             {
-                var obj = session.Get<ReadSide.Outsource.EvaluationItem>(new Guid(id));
-                if (obj == null)
-                    throw new Exception(string.Format("The evaluationItem '{0}' is not exist.", id));
-                var response = new EvaluationItem
-                {
-                    Id = request.Id,
-                    Name = obj.Name,
-                    StatisticalWay = obj.StatisticalWay,
-                    Status = "inuse"
-                };
+                Id = request.Id,
+                Name = obj.Name,
+                StatisticalWay = obj.StatisticalWay,
+                Status = "inuse"
+            };
 
-                if (request.Mode == "read")
-                {
-                    AsReadMode(response);
-                }
-                else if (request.Mode == "edit")
-                {
-                    response.SetFormulaOptions = new[] { LinearFormula(request.Id), SlideFormula(request.Id) };
-                    response.Links = new[]
+            if (request.Mode == "read")
+            {
+                AsReadMode(response);
+            }
+            else if (request.Mode == "edit")
+            {
+                response.SetFormulaOptions = new[] { LinearFormula(request.Id), SlideFormula(request.Id) };
+                response.Links = new[]
                     {
                          new Link { Name ="Update",  Method = "PUT"},
                          new Link { Name ="Discard",  Method = "GET", Request = new GetEvaluationItem { Id = id, Mode = "read"} }
                     };
-                }
-                return response;
             }
+            return response;
         }
 
         private static EvaluationItem AsReadMode(EvaluationItem obj)
@@ -151,14 +148,8 @@ namespace Grandsys.Wfm.Services.Outsource.ServiceInterface
 
         public object Put(EnableEvaluationItem request)
         {
-            var result = _commandService.Execute(new Grandsys.Wfm.Backend.Outsource.Commands.EnableEvaluationItem { ItemId = new Guid(request.Id) });
-            if (result.IsCompleted)
-            {
-                //return new EvaluationItem { Id = request.Id };
-                return null;
-            }
-            else
-                throw result.ErrorInfo.Exception;
+            _commandService.Execute(new Grandsys.Wfm.Backend.Outsource.Commands.EnableEvaluationItem { ItemId = new Guid(request.Id) });
+            return Get(new GetEvaluationItem() { Id = request.Id, Mode = "read" });
         }
 
         public object Any(SlideFormula request)

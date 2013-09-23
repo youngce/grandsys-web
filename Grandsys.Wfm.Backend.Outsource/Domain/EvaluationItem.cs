@@ -196,7 +196,8 @@ namespace Grandsys.Wfm.Backend.Outsource.Domain
             _inuse = true;
             _name = evnt.Name;
             _statisticalWay = evnt.StatisticalWay;
-            _formula = StatisticalWay.By(evnt.StatisticalWay);
+            
+            _formula = Domain.StatisticalWay.By(evnt.StatisticalWay);
         }
 
         public void ChangeGradeSteps(IEnumerable<GradeStep> gradeSteps)
@@ -224,5 +225,8 @@ namespace Grandsys.Wfm.Backend.Outsource.Domain
         {
             _inuse = evnt.Inuse;
         }
+
+        public string Name { get { return _name; } }
+        public string StatisticalWay { get { return _statisticalWay; } }
     }
 }
