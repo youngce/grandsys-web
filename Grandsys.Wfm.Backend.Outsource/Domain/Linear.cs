@@ -5,16 +5,16 @@ using Grandsys.Wfm.Backend.Outsource.Events;
 namespace Grandsys.Wfm.Backend.Outsource.Domain
 {
     [Serializable]
-    public class LinearFormula : IFormula
+    public class Linear : IFormula
     {
         private readonly double _baseIndicator;
         private readonly double _scale;
         private readonly double _decreaseStepScore;
         private readonly double _increaseStepScore;
 
-        public LinearFormula() { }
+        public Linear() { }
 
-        public LinearFormula(ParametersInfo values)
+        public Linear(ParametersInfo values)
         {
             _baseIndicator = values.BaseIndicator;
             _scale = values.Scale;

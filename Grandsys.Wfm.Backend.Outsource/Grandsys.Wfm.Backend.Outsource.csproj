@@ -45,10 +45,10 @@
     <Compile Include="Domain\EvaluationItem.cs" />
     <Compile Include="Domain\GradeStep.cs" />
     <Compile Include="Domain\LessThanOrEqualToZeroException.cs" />
-    <Compile Include="Domain\LinearFormula.cs" />
+    <Compile Include="Domain\Linear.cs" />
     <Compile Include="Domain\NonOverlappingGradeSteps.cs" />
     <Compile Include="Domain\Range.cs" />
-    <Compile Include="Domain\SlideFormula.cs" />
+    <Compile Include="Domain\Slide.cs" />
     <Compile Include="Domain\StatisticalWay.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

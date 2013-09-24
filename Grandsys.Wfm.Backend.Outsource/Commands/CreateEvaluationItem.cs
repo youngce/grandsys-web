@@ -32,7 +32,22 @@ namespace Grandsys.Wfm.Backend.Outsource.Commands
         public double BaseIndicator { get; set; }
         public double BaseScore { get; set; }
         public double Scale { get; set; }
+
         public double IncreaseStepScore { get; set; }
         public double DecreaseStepScore { get; set; }
+    }
+
+    [Serializable]
+    public class SetSlideFormula : Command
+    {
+        public Guid EvaluationItemId { get; set; }
+
+        public double BaseIndicator { get; set; }
+        public double BaseScore { get; set; }
+        public double Scale { get; set; }
+
+        public double StepScore { get; set; }
+        public double StartIndicator { get; set; }
+        public double FinalIndicator { get; set; }
     }
 }

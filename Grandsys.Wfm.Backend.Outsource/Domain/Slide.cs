@@ -5,7 +5,7 @@ using Grandsys.Wfm.Backend.Outsource.Events;
 namespace Grandsys.Wfm.Backend.Outsource.Domain
 {
     [Serializable]
-    public class SlideFormula
+    public class Slide : IFormula
     {
         private readonly double _baseIndicator;
         private readonly double _startIndicator;
@@ -13,9 +13,9 @@ namespace Grandsys.Wfm.Backend.Outsource.Domain
         private readonly double _stepScore;
         private readonly double _scale;
 
-        public SlideFormula() { }
+        public Slide() { }
 
-        public SlideFormula(ParametersInfo values)
+        public Slide(ParametersInfo values)
         {
             if (!IsValid(values.BaseIndicator, values.StartIndicator, values.FinalIndicator))
                 throw new ArgumentException();

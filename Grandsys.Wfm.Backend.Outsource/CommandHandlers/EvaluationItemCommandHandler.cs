@@ -15,7 +15,7 @@ namespace Grandsys.Wfm.Backend.Outsource.CommandHandlers
         ICommandHandler<CreatePieceEvaluationItem>,
         ICommandHandler<CreateRatioEvaluationItem>,
         ICommandHandler<SetLinearFormula>,
-        ICommandHandler<DeleteEvaluationItem>, ICommandHandler<EnableEvaluationItem>
+        ICommandHandler<DeleteEvaluationItem>, ICommandHandler<EnableEvaluationItem>, ICommandHandler<SetSlideFormula>
     {
         void ICommandHandler<CreatePieceEvaluationItem>.Handle(ICommandContext context, CreatePieceEvaluationItem command)
         {
@@ -42,7 +42,7 @@ namespace Grandsys.Wfm.Backend.Outsource.CommandHandlers
             };
 
             //var des = string.Format(@"達作業指標{0}得{1}分, 每增加{2},則{3},每减少{2},則{4}.", command.BaseIndicator, command.BaseScore, command.Scale, command.IncreaseStepScore, command.DecreaseStepScore);
-            obj.ChangeGradeSteps(paramsInfo, new LinearFormula(paramsInfo));
+            obj.ChangeGradeSteps(paramsInfo, new Linear(paramsInfo));
         }
 
         void ICommandHandler<DeleteEvaluationItem>.Handle(ICommandContext context, DeleteEvaluationItem command)
@@ -55,6 +55,23 @@ namespace Grandsys.Wfm.Backend.Outsource.CommandHandlers
         {
             var obj = context.Get<EvaluationItem>(command.ItemId);
             obj.Enable();
+        }
+
+        void ICommandHandler<SetSlideFormula>.Handle(ICommandContext context, SetSlideFormula command)
+        {
+            var obj = context.Get<EvaluationItem>(command.EvaluationItemId);
+
+            var paramsInfo = new ParametersInfo
+            {
+                BaseIndicator = command.BaseIndicator,
+                BaseScore = command.BaseScore,
+                Scale = command.Scale,
+                StepScore = command.StepScore,
+                StartIndicator = command.StartIndicator,
+                FinalIndicator = command.FinalIndicator
+            };
+
+            obj.ChangeGradeSteps(paramsInfo, new Slide(paramsInfo));
         }
     }
 

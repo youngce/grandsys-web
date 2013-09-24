@@ -10,7 +10,18 @@ namespace Grandsys.Wfm.Services.Outsource.ServiceInterface
     {
         public object Any(SlideFormula request)
         {
-            throw new NotImplementedException();
+            _commandService.Execute(new Backend.Outsource.Commands.SetSlideFormula()
+            {
+                EvaluationItemId = new Guid(request.EvaluationItemId),
+                BaseIndicator = request.BaseIndicator,
+                Scale = request.Scale,
+                BaseScore = request.BaseScore,
+                StepScore = request.StepScore,
+                StartIndicator = request.StartIndicator,
+                FinalIndicator = request.FinalIndicator
+            });
+
+            return Get(new GetEvaluationItem() { Id = request.EvaluationItemId, Mode = "read" });
         }
 
         public object Any(LinearFormula request)
