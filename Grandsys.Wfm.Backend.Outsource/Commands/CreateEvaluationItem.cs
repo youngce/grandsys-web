@@ -27,8 +27,12 @@ namespace Grandsys.Wfm.Backend.Outsource.Commands
     [Serializable]
     public class SetLinearFormula :Command
     {
-        public string EvaluationItemId { get; set; }
+        public Guid EvaluationItemId { get; set; }
+
         public double BaseIndicator { get; set; }
-        public double Scal { get; set; }
+        public double BaseScore { get; set; }
+        public double Scale { get; set; }
+        public double IncreaseStepScore { get; set; }
+        public double DecreaseStepScore { get; set; }
     }
 }

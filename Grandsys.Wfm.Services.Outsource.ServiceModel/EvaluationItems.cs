@@ -66,18 +66,30 @@ namespace Grandsys.Wfm.Services.Outsource.ServiceModel
         public string Name { get; set; }
     }
 
-    [Route("/formula/{EvaluationItemId}/Linear", "POST GET")]
+    [Route("/formula/{EvaluationItemId}/Linear", "PUT GET")]
     public class LinearFormula : IReturn<LinearFormula>
     {
         public string EvaluationItemId { get; set; }
+
         public double BaseIndicator { get; set; }
-        public double Scal { get; set; }
+        public double BaseScore { get; set; }
+        public double Scale { get; set; }
+        public double IncreaseStepScore { get; set; }
+        public double DecreaseStepScore { get; set; }
     }
 
-    [Route("/formula/{EvaluationItemId}/Slide", "POST GET")]
+    [Route("/formula/{EvaluationItemId}/Slide", "PUT GET")]
     public class SlideFormula : IReturn<SlideFormula>
     {
         public string EvaluationItemId { get; set; }
+
+        public double BaseIndicator { get; set; }
+        public double BaseScore { get; set; }
+        public double Scale { get; set; }
+
+        public double StepScore { get; set; }
+        public double StartIndicator { get; set; }
+        public double FinalIndicator { get; set; }
     }
 
     //Response DTO
@@ -87,6 +99,8 @@ namespace Grandsys.Wfm.Services.Outsource.ServiceModel
         public string Name { get; set; }
         public string StatisticalWay { get; set; } //ratio, piece
         public string Status { get; set; }
+        public string Description { get; set; }
+        public string Formula { get; set; }
 
         public IEnumerable<Link> SetFormulaOptions { get; set; }
 
