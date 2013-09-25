@@ -23,16 +23,16 @@ namespace Grandsys.Wfm.Backend.Outsource.Domain
             _stepScore = values.StepScore;
             _scale = values.Scale;
 
-            if (!IsValid(_baseIndicator, _startIndicator, _finalIndicator))
+            if (!IsValid())
                 throw new ArgumentException();
         }
 
-        private bool IsValid(double baseIndicator, double startIndicator, double finalIndicator)
+        private bool IsValid()
         {
-            if (Math.Abs(startIndicator) >= Math.Abs(finalIndicator))
+            if (Math.Abs(_startIndicator) >= Math.Abs(_finalIndicator))
                 return false;
 
-            if (startIndicator <= baseIndicator && baseIndicator < finalIndicator)
+            if (_startIndicator <= _baseIndicator && _baseIndicator < _finalIndicator)
                 return false;
 
             return true;

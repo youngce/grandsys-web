@@ -15,7 +15,7 @@ namespace Grandsys.Wfm.Services.Outsource.ServiceModel
         public string Method { get; set; }
     }
 
-    
+
 
     [Route("/evaluationItems", "GET")]
     public class EvaluationItems : IReturn<List<EvaluationItem>>
@@ -23,7 +23,7 @@ namespace Grandsys.Wfm.Services.Outsource.ServiceModel
         //public string StatisticalWay { get; set; }
     }
 
-   
+
 
     [Route("/evaluationItems/{Id}", "GET")]
     public class GetEvaluationItem : IReturn<EvaluationItem>
@@ -37,15 +37,32 @@ namespace Grandsys.Wfm.Services.Outsource.ServiceModel
     {
         public IEnumerable<Link> Links { get; set; }
     }
-    
-    [Route("/evaluationItems/{Id}", "PUT")]
-    public class EnableEvaluationItem : IReturn
+
+    [Route("/evaluationItems/{Id}", "PUT PATCH")]
+    public class UpdateEvaluationItem : IReturn
     {
         public string Id { get; set; }
         public string Name { get; set; }
+        public FormulaInfo Formula { get; set; }
     }
 
-    
+    public class FormulaInfo
+    {
+        public string Type { get; set; }
+
+        public double BaseIndicator { get; set; }
+        public double BaseScore { get; set; }
+        public double Scale { get; set; }
+
+        //linear
+        public double IncreaseStepScore { get; set; }
+        public double DecreaseStepScore { get; set; }
+
+        //slide
+        public double StepScore { get; set; }
+        public double StartIndicator { get; set; }
+        public double FinalIndicator { get; set; }
+    }
 
     [Route("/evaluationItems/{Id}", "DELETE")]
     public class DeleteEvaluationItem : IReturn<EvaluationItem>

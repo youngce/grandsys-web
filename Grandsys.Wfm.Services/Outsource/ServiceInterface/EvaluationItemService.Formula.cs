@@ -8,36 +8,36 @@ namespace Grandsys.Wfm.Services.Outsource.ServiceInterface
 {
     public partial class EvaluationItemService
     {
-        public object Any(SlideFormula request)
-        {
-            _commandService.Execute(new Backend.Outsource.Commands.SetSlideFormula()
-            {
-                EvaluationItemId = new Guid(request.EvaluationItemId),
-                BaseIndicator = request.BaseIndicator,
-                Scale = request.Scale,
-                BaseScore = request.BaseScore,
-                StepScore = request.StepScore,
-                StartIndicator = request.StartIndicator,
-                FinalIndicator = request.FinalIndicator
-            });
+        //public object Any(SlideFormula request)
+        //{
+        //    _commandService.Execute(new Backend.Outsource.Commands.SetSlideFormula()
+        //    {
+        //        EvaluationItemId = new Guid(request.EvaluationItemId),
+        //        BaseIndicator = request.BaseIndicator,
+        //        Scale = request.Scale,
+        //        BaseScore = request.BaseScore,
+        //        StepScore = request.StepScore,
+        //        StartIndicator = request.StartIndicator,
+        //        FinalIndicator = request.FinalIndicator
+        //    });
 
-            return Get(new GetEvaluationItem() { Id = request.EvaluationItemId, Mode = "read" });
-        }
+        //    return Get(new GetEvaluationItem() { Id = request.EvaluationItemId, Mode = "read" });
+        //}
 
-        public object Any(LinearFormula request)
-        {
-            _commandService.Execute(new Backend.Outsource.Commands.SetLinearFormula()
-            {
-                EvaluationItemId = new Guid(request.EvaluationItemId),
-                BaseIndicator = request.BaseIndicator,
-                Scale = request.Scale,
-                BaseScore = request.BaseScore,
-                IncreaseStepScore = request.IncreaseStepScore,
-                DecreaseStepScore = request.DecreaseStepScore
-            });
+        //public object Any(LinearFormula request)
+        //{
+        //    _commandService.Execute(new Backend.Outsource.Commands.SetLinearFormula()
+        //    {
+        //        EvaluationItemId = new Guid(request.EvaluationItemId),
+        //        BaseIndicator = request.BaseIndicator,
+        //        Scale = request.Scale,
+        //        BaseScore = request.BaseScore,
+        //        IncreaseStepScore = request.IncreaseStepScore,
+        //        DecreaseStepScore = request.DecreaseStepScore
+        //    });
 
-            return Get(new GetEvaluationItem() { Id = request.EvaluationItemId, Mode = "read" });
-        }
+        //    return Get(new GetEvaluationItem() { Id = request.EvaluationItemId, Mode = "read" });
+        //}
 
         private IEnumerable<Link> GetFormulaOptions(Backend.Outsource.Domain.EvaluationItem obj)
         {

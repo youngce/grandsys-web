@@ -66,8 +66,8 @@ namespace Grandsys.Wfm.Services.Outsource.ServiceInterface
                 response.SetFormulaOptions = GetFormulaOptions(obj);
                 response.Links = new[]
                     {
-                        new Link { Name = "Update", Method = "PUT" },
-                         new Link { Name ="Discard",  Method = "GET", Request = new GetEvaluationItem { Id = id, Mode = "read"} }
+                        new Link { Name = "Update", Method = "PATCH", Request = new UpdateEvaluationItem(){ Id = id} },
+                        new Link { Name ="Discard",  Method = "GET", Request = new GetEvaluationItem { Id = id, Mode = "read"} }
                     };
             }
             return response;
