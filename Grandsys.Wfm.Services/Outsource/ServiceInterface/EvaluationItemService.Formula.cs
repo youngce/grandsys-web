@@ -51,7 +51,7 @@ namespace Grandsys.Wfm.Services.Outsource.ServiceInterface
                 DecreaseStepScore = 0,
                 IncreaseStepScore = 0,
                 StepScore = -5,
-                StartIndicator = 4,
+                StartIndicator = 3,
                 FinalIndicator = 14
             };
 

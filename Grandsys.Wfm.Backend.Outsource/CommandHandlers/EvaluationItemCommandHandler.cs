@@ -38,7 +38,11 @@ namespace Grandsys.Wfm.Backend.Outsource.CommandHandlers
                 BaseScore = command.BaseScore,
                 Scale = command.Scale,
                 IncreaseStepScore = command.IncreaseStepScore,
-                DecreaseStepScore = command.DecreaseStepScore
+                DecreaseStepScore = command.DecreaseStepScore,
+
+                StepScore = -5,
+                StartIndicator = 3,
+                FinalIndicator = 14
             };
 
             //var des = string.Format(@"達作業指標{0}得{1}分, 每增加{2},則{3},每减少{2},則{4}.", command.BaseIndicator, command.BaseScore, command.Scale, command.IncreaseStepScore, command.DecreaseStepScore);
@@ -68,7 +72,10 @@ namespace Grandsys.Wfm.Backend.Outsource.CommandHandlers
                 Scale = command.Scale,
                 StepScore = command.StepScore,
                 StartIndicator = command.StartIndicator,
-                FinalIndicator = command.FinalIndicator
+                FinalIndicator = command.FinalIndicator,
+
+                DecreaseStepScore = 0,
+                IncreaseStepScore = 0,
             };
 
             obj.ChangeGradeSteps(paramsInfo, new Slide(paramsInfo));

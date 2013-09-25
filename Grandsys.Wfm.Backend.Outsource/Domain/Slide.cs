@@ -17,14 +17,14 @@ namespace Grandsys.Wfm.Backend.Outsource.Domain
 
         public Slide(ParametersInfo values)
         {
-            if (!IsValid(values.BaseIndicator, values.StartIndicator, values.FinalIndicator))
-                throw new ArgumentException();
-
             _baseIndicator = values.BaseIndicator;
-            _startIndicator = values.StartIndicator;
+            _startIndicator = values.StartIndicator + _scale;
             _finalIndicator = values.FinalIndicator;
             _stepScore = values.StepScore;
             _scale = values.Scale;
+
+            if (!IsValid(_baseIndicator, _startIndicator, _finalIndicator))
+                throw new ArgumentException();
         }
 
         private bool IsValid(double baseIndicator, double startIndicator, double finalIndicator)
