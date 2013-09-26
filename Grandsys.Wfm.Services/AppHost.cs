@@ -12,6 +12,7 @@ using NHibernate.Dialect;
 using NHibernate.Driver;
 using NHibernate.Tool.hbm2ddl;
 using ServiceStack.ServiceHost;
+using ServiceStack.Text;
 using ServiceStack.WebHost.Endpoints;
 using Configuration = NHibernate.Cfg.Configuration;
 
@@ -68,6 +69,7 @@ namespace Grandsys.Wfm.Services
 
             container.Adapter = new AutofacIocAdapter(((AutofacObjectContainer)ObjectContainer.Current).Container);
 
+            //JsConfig.ExcludeTypeInfo = true;
             //Routes
             //    .Add<Note>("/hello")
             //    .Add<Note>("/hello/{Name}", "POST")

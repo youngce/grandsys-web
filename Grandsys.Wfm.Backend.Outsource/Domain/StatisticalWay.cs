@@ -23,5 +23,36 @@ namespace Grandsys.Wfm.Backend.Outsource.Domain
                 IsNotIntergerThrow(values.Scale);
             }
         }
+
+        public static IItemDescription Create(this string way, dynamic values)
+        {
+            if (way == "ratio")
+            {
+                return new RatioDescription
+                {
+                    Denominator = values.Denominator,
+                    Numerator = values.Numerator,
+                    Unit = values.Unit
+                };
+            }
+            if (way == "piece")
+            {
+                return new PieceDescription { Title = values.Title, Unit = values.Unit };
+            }
+            throw new NotImplementedException();
+        }
+
+        public static IItemDescription Create(this string way)
+        {
+            if (way == "ratio")
+            {
+                return new RatioDescription();
+            }
+            if (way == "piece")
+            {
+                return new PieceDescription();
+            }
+            throw new NotImplementedException();
+        }
     }
 }

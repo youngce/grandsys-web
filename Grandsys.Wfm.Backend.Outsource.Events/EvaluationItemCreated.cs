@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using ENode.Eventing;
 
@@ -47,5 +48,26 @@ namespace Grandsys.Wfm.Backend.Outsource.Events
         public bool Inuse { get; private set; }
 
         public Guid EvaluationItemId { get; private set; }
+    }
+
+    [Serializable]
+    public class EvaluationItemNameChanged : Event
+    {
+        public Guid ItemId { get; set; }
+        public string NewName { get; set; }
+            
+    }
+
+    [Serializable]
+    public class EvaluationItemDescriptionChanged : Event
+    {
+        public Guid ItemId { get; set; }
+        public IItemDescription Description { get; set; }
+
+    }
+
+    public interface IItemDescription
+    {
+        object ToDto();
     }
 }

@@ -13,6 +13,8 @@ namespace Grandsys.Wfm.Backend.Outsource.Domain
         private readonly double _stepScore;
         private readonly double _scale;
 
+        //private readonly object _valueObject;
+
         public Slide() { }
 
         public Slide(ParametersInfo values)
@@ -78,6 +80,11 @@ namespace Grandsys.Wfm.Backend.Outsource.Domain
                 index += 1;
             }
             return result;
+        }
+
+        public object ToValue()
+        {
+            return new { BaseIndicator = _baseIndicator, StartIndicator = (_startIndicator - _scale), FinalIndicator = _finalIndicator, StepScore = _stepScore, Scale = _scale };
         }
     }
 }

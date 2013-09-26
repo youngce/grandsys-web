@@ -50,4 +50,11 @@ namespace Grandsys.Wfm.Backend.Outsource.Commands
         public double StartIndicator { get; set; }
         public double FinalIndicator { get; set; }
     }
+
+    [Serializable]
+    public class ChangeEvaluationItemName : Command
+    {
+        public Guid ItemId { get; set; }
+        public string NewName { get; set; }
+    }
 }

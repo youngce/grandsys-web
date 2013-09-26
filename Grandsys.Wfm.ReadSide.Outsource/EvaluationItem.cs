@@ -17,7 +17,7 @@ namespace Grandsys.Wfm.ReadSide.Outsource
     }
 
     [Component]
-    public class EvaluationItemEventHandler : IEventHandler<EvaluationItemCreated>, IEventHandler<EvaluationItemAvailability>
+    public class EvaluationItemEventHandler : IEventHandler<EvaluationItemCreated>, IEventHandler<EvaluationItemAvailability>, IEventHandler<EvaluationItemNameChanged>
     {
         private readonly ISessionFactory _sessionFactory;
 
@@ -56,7 +56,21 @@ namespace Grandsys.Wfm.ReadSide.Outsource
                 }
                 else
                     session.Delete(session.Load<EvaluationItem>(evnt.EvaluationItemId));
-                    
+
+                session.Flush();
+            }
+        }
+
+        public void Handle(EvaluationItemNameChanged evnt)
+        {
+            using (var session = _sessionFactory.OpenSession())
+            {
+                var obj = session.Get<EvaluationItem>(evnt.ItemId);
+                if (obj == null)
+                    return;
+
+                obj.Name = evnt.NewName;
+                session.Update(obj);
                 session.Flush();
             }
         }

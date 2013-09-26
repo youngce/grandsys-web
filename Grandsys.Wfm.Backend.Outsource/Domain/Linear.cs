@@ -12,6 +12,7 @@ namespace Grandsys.Wfm.Backend.Outsource.Domain
         private readonly double _decreaseStepScore;
         private readonly double _increaseStepScore;
 
+       
         public Linear() { }
 
         public Linear(ParametersInfo values)
@@ -20,6 +21,8 @@ namespace Grandsys.Wfm.Backend.Outsource.Domain
             _scale = values.Scale;
             _decreaseStepScore = values.DecreaseStepScore;
             _increaseStepScore = values.IncreaseStepScore;
+
+          
         }
 
         public IEnumerable<GradeStep> GenGradeSteps()
@@ -30,6 +33,10 @@ namespace Grandsys.Wfm.Backend.Outsource.Domain
             return new[] { decreaseGradeStep, increaseGradeStep };
         }
 
-        
+
+        public object ToValue()
+        {
+            return new { BaseIndicator = _baseIndicator, Scale = _scale, DecreaseStepScore = _decreaseStepScore, IncreaseStepScore = _increaseStepScore}; ;
+        }
     }
 }

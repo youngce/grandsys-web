@@ -15,7 +15,7 @@ namespace Grandsys.Wfm.Services.Outsource.ServiceModel
         public string Method { get; set; }
     }
 
-
+    
 
     [Route("/evaluationItems", "GET")]
     public class EvaluationItems : IReturn<List<EvaluationItem>>
@@ -44,7 +44,10 @@ namespace Grandsys.Wfm.Services.Outsource.ServiceModel
         public string Id { get; set; }
         public string Name { get; set; }
         public FormulaInfo Formula { get; set; }
+        public DescriptionInfo Description { get; set; }
     }
+
+   
 
     public class FormulaInfo
     {
@@ -116,12 +119,21 @@ namespace Grandsys.Wfm.Services.Outsource.ServiceModel
         public string Name { get; set; }
         public string StatisticalWay { get; set; } //ratio, piece
         public string Status { get; set; }
-        public string Description { get; set; }
+        public object Description { get; set; }
         public string Formula { get; set; }
+        public string FormulaParams { get; set; }
 
         public IEnumerable<Link> SetFormulaOptions { get; set; }
 
         public IEnumerable<Link> Links { get; set; }
+    }
+
+    public class DescriptionInfo
+    {
+        public string Title { get; set; }
+        public string Unit { get; set; }
+        public string Denominator { get; set; }
+        public string Numerator { get; set; }
     }
 
 }
