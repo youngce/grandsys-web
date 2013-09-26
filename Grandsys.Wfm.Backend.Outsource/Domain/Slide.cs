@@ -12,6 +12,8 @@ namespace Grandsys.Wfm.Backend.Outsource.Domain
         private readonly double _finalIndicator;
         private readonly double _stepScore;
         private readonly double _scale;
+        private readonly double _baseScore;
+
 
         //private readonly object _valueObject;
 
@@ -24,6 +26,7 @@ namespace Grandsys.Wfm.Backend.Outsource.Domain
             _finalIndicator = values.FinalIndicator;
             _stepScore = values.StepScore;
             _scale = values.Scale;
+            _baseScore = values.BaseScore;
 
             if (!IsValid())
                 throw new ArgumentException();
@@ -84,7 +87,15 @@ namespace Grandsys.Wfm.Backend.Outsource.Domain
 
         public object ToValue()
         {
-            return new { BaseIndicator = _baseIndicator, StartIndicator = (_startIndicator - _scale), FinalIndicator = _finalIndicator, StepScore = _stepScore, Scale = _scale };
+            return new
+            {
+                BaseIndicator = _baseIndicator,
+                BaseScore = _baseScore,
+                StartIndicator = (_startIndicator - _scale),
+                FinalIndicator = _finalIndicator,
+                StepScore = _stepScore,
+                Scale = _scale
+            };
         }
     }
 }
