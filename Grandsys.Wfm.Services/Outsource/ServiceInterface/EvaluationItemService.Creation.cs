@@ -23,7 +23,7 @@ namespace Grandsys.Wfm.Services.Outsource.ServiceInterface
         public object Post(RatioEvaluationItem request)
         {
             var evaluationItemId = Guid.NewGuid();
-            _commandService.Send(new Grandsys.Wfm.Backend.Outsource.Commands.CreateRatioEvaluationItem { EvaluationItemId = evaluationItemId, Name = request.Name });
+            var result =_commandService.Execute(new Grandsys.Wfm.Backend.Outsource.Commands.CreateRatioEvaluationItem { EvaluationItemId = evaluationItemId, Name = request.Name });
 
             var id = evaluationItemId.ToString();
 
@@ -39,7 +39,7 @@ namespace Grandsys.Wfm.Services.Outsource.ServiceInterface
         public object Post(PieceEvaluationItem request)
         {
             var evaluationItemId = Guid.NewGuid();
-            _commandService.Send(new Grandsys.Wfm.Backend.Outsource.Commands.CreatePieceEvaluationItem { EvaluationItemId = evaluationItemId, Name = request.Name });
+           var result =  _commandService.Execute(new Grandsys.Wfm.Backend.Outsource.Commands.CreatePieceEvaluationItem { EvaluationItemId = evaluationItemId, Name = request.Name });
 
             var id = evaluationItemId.ToString();
 
