@@ -7,21 +7,19 @@ namespace Grandsys.Wfm.Backend.Outsource.Domain
     [Serializable]
     public class Linear : IFormula
     {
-        private readonly double _baseIndicator;
-        private readonly double _scale;
-        private readonly double _decreaseStepScore;
-        private readonly double _increaseStepScore;
-        private readonly double _baseScore;
+        private double _baseIndicator;
+        private double _scale;
+        private double _decreaseStepScore;
+        private double _increaseStepScore;
+        private double _baseScore;
+        private ParametersInfo _parameters;
+
 
         public Linear() { }
 
         public Linear(ParametersInfo values)
         {
-            _baseIndicator = values.BaseIndicator;
-            _scale = values.Scale;
-            _decreaseStepScore = values.DecreaseStepScore;
-            _increaseStepScore = values.IncreaseStepScore;
-            _baseScore = values.BaseScore;
+            Parameters = values;
         }
 
         public IEnumerable<GradeStep> GenGradeSteps()
@@ -43,6 +41,23 @@ namespace Grandsys.Wfm.Backend.Outsource.Domain
                 DecreaseStepScore = _decreaseStepScore,
                 IncreaseStepScore = _increaseStepScore
             };
+        }
+
+        public ParametersInfo Parameters
+        {
+            get
+            {
+                return _parameters;
+            }
+            private set
+            {
+                _baseIndicator = value.BaseIndicator;
+                _scale = value.Scale;
+                _decreaseStepScore = value.DecreaseStepScore;
+                _increaseStepScore = value.IncreaseStepScore;
+                _baseScore = value.BaseScore;
+                _parameters = value;
+            }
         }
     }
 }

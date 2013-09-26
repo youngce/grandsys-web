@@ -106,7 +106,7 @@ namespace Grandsys.Wfm.Backend.Outsource.Domain
         void IEventHandler<EvaluationItemFormulaChanged>.Handle(EvaluationItemFormulaChanged evnt)
         {
             _formula = evnt.Formula;
-            _formulaParams = evnt.Parameters;
+            _formulaParams = _formula.Parameters;
             Formula = _formula.GetType().Name;
         }
 
@@ -122,10 +122,10 @@ namespace Grandsys.Wfm.Backend.Outsource.Domain
             RaiseEvent(new EvaluationItemNameChanged { ItemId = Id, NewName = newName });
         }
 
-        public void ChangeGradeSteps(ParametersInfo paramsInfo, IFormula formula)
+        public void ChangeGradeSteps(IFormula formula)
         {
-            _statisticalWay.IsValid(paramsInfo);
-            RaiseEvent(new EvaluationItemFormulaChanged { Formula = formula, Parameters = paramsInfo });
+            _statisticalWay.IsValid(formula.Parameters);
+            RaiseEvent(new EvaluationItemFormulaChanged { Formula = formula });
         }
 
         public void SetDescription(object values)

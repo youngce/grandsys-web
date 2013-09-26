@@ -8,6 +8,7 @@ namespace Grandsys.Wfm.Backend.Outsource.Events
     public interface IFormula
     {
         object ToValue();
+        ParametersInfo Parameters { get; }
         //IEnumerable<GradeStep> GenGradeSteps();
     }
 
@@ -16,7 +17,6 @@ namespace Grandsys.Wfm.Backend.Outsource.Events
     {
         public IFormula Formula { get; set; }
         public string Description { get; set; }
-        public ParametersInfo Parameters { get; set; }
     }
 
     [Serializable]

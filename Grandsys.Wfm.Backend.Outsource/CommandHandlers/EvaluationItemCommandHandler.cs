@@ -70,7 +70,7 @@ namespace Grandsys.Wfm.Backend.Outsource.CommandHandlers
             };
 
             //var des = string.Format(@"達作業指標{0}得{1}分, 每增加{2},則{3},每减少{2},則{4}.", command.BaseIndicator, command.BaseScore, command.Scale, command.IncreaseStepScore, command.DecreaseStepScore);
-            obj.ChangeGradeSteps(paramsInfo, new Linear(paramsInfo));
+            obj.ChangeGradeSteps(new Linear(paramsInfo));
         }
 
         void ICommandHandler<SetSlideFormula>.Handle(ICommandContext context, SetSlideFormula command)
@@ -89,7 +89,7 @@ namespace Grandsys.Wfm.Backend.Outsource.CommandHandlers
                 IncreaseStepScore = 0,
             };
 
-            obj.ChangeGradeSteps(paramsInfo, new Slide(paramsInfo));
+            obj.ChangeGradeSteps(new Slide(paramsInfo));
         }
     }
 }

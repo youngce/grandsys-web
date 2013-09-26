@@ -69,7 +69,7 @@ namespace Grandsys.Wfm.Services
 
             container.Adapter = new AutofacIocAdapter(((AutofacObjectContainer)ObjectContainer.Current).Container);
 
-            //JsConfig.ExcludeTypeInfo = true;
+            JsConfig<EvaluationItem>.ExcludeTypeInfo = true;
             //Routes
             //    .Add<Note>("/hello")
             //    .Add<Note>("/hello/{Name}", "POST")

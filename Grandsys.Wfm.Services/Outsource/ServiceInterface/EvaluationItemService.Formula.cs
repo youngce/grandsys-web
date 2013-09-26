@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using Grandsys.Wfm.Backend.Outsource.Events;
 using Grandsys.Wfm.Services.Outsource.ServiceModel;
+using NHibernate.Dialect.Function;
+using ServiceStack.Common;
 using EvaluationItem = Grandsys.Wfm.Backend.Outsource.Domain.EvaluationItem;
 
 namespace Grandsys.Wfm.Services.Outsource.ServiceInterface
@@ -9,9 +11,7 @@ namespace Grandsys.Wfm.Services.Outsource.ServiceInterface
     {
         private IEnumerable<Link> GetFormulaOptions(EvaluationItem obj)
         {
-            string id = obj.Id.ToString();
-
-            ParametersInfo value = obj.AllFormulaParams ?? new ParametersInfo
+            var defaultValue = new ParametersInfo
             {
                 BaseIndicator = 0,
                 BaseScore = 100,
@@ -23,36 +23,28 @@ namespace Grandsys.Wfm.Services.Outsource.ServiceInterface
                 FinalIndicator = 14
             };
 
+            var f1 = new LinearFormula().PopulateWith(defaultValue);
+            var f2 = new SlideFormula().PopulateWith(defaultValue);
+
+            if (obj.FormulaParams != null)
+            {
+                f1.PopulateWith(obj.FormulaParams);
+                f2.PopulateWith(obj.FormulaParams);
+            }
+
             var links = new[]
             {
                 new Link
                 {
                     Name = "Linear",
                     Method = "PUT",
-                    Request = new LinearFormula
-                    {
-                        EvaluationItemId = id,
-                        BaseIndicator = value.BaseIndicator,
-                        BaseScore = value.BaseScore,
-                        Scale = value.Scale,
-                        DecreaseStepScore = value.DecreaseStepScore,
-                        IncreaseStepScore = value.IncreaseStepScore
-                    }
+                    Request = f1
                 },
                 new Link
                 {
                     Name = "Slide",
                     Method = "PUT",
-                    Request = new SlideFormula
-                    {
-                        EvaluationItemId = id,
-                        BaseIndicator = value.BaseIndicator,
-                        BaseScore = value.BaseScore,
-                        Scale = value.Scale,
-                        StepScore = value.StepScore,
-                        StartIndicator = value.StartIndicator,
-                        FinalIndicator = value.FinalIndicator
-                    }
+                    Request = f2
                 }
             };
 

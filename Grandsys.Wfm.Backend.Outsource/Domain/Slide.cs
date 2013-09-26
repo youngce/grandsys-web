@@ -7,29 +7,19 @@ namespace Grandsys.Wfm.Backend.Outsource.Domain
     [Serializable]
     public class Slide : IFormula
     {
-        private readonly double _baseIndicator;
-        private readonly double _startIndicator;
-        private readonly double _finalIndicator;
-        private readonly double _stepScore;
-        private readonly double _scale;
-        private readonly double _baseScore;
-
-
-        //private readonly object _valueObject;
+        private  double _baseIndicator;
+        private  double _startIndicator;
+        private  double _finalIndicator;
+        private  double _stepScore;
+        private  double _scale;
+        private  double _baseScore;
+        private ParametersInfo _parameters;
 
         public Slide() { }
 
         public Slide(ParametersInfo values)
         {
-            _baseIndicator = values.BaseIndicator;
-            _startIndicator = values.StartIndicator + _scale;
-            _finalIndicator = values.FinalIndicator;
-            _stepScore = values.StepScore;
-            _scale = values.Scale;
-            _baseScore = values.BaseScore;
-
-            if (!IsValid())
-                throw new ArgumentException();
+            Parameters = values;
         }
 
         private bool IsValid()
@@ -96,6 +86,27 @@ namespace Grandsys.Wfm.Backend.Outsource.Domain
                 StepScore = _stepScore,
                 Scale = _scale
             };
+        }
+
+        public ParametersInfo Parameters
+        {
+            get
+            {
+                return _parameters;
+            }
+            private set
+            {
+                _baseIndicator = value.BaseIndicator;
+                _startIndicator = value.StartIndicator + _scale;
+                _finalIndicator = value.FinalIndicator;
+                _stepScore = value.StepScore;
+                _scale = value.Scale;
+                _baseScore = value.BaseScore;
+
+                if (!IsValid())
+                    throw new ArgumentException();
+                _parameters = value;
+            }
         }
     }
 }

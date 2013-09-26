@@ -1,10 +1,5 @@
-﻿using ServiceStack.ServiceHost;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-
+﻿using System.Collections.Generic;
+using ServiceStack.ServiceHost;
 
 namespace Grandsys.Wfm.Services.Outsource.ServiceModel
 {
@@ -15,14 +10,12 @@ namespace Grandsys.Wfm.Services.Outsource.ServiceModel
         public string Method { get; set; }
     }
 
-    
 
     [Route("/evaluationItems", "GET")]
     public class EvaluationItems : IReturn<List<EvaluationItem>>
     {
         //public string StatisticalWay { get; set; }
     }
-
 
 
     [Route("/evaluationItems/{Id}", "GET")]
@@ -47,7 +40,6 @@ namespace Grandsys.Wfm.Services.Outsource.ServiceModel
         public DescriptionInfo Description { get; set; }
     }
 
-   
 
     public class FormulaInfo
     {
@@ -86,11 +78,8 @@ namespace Grandsys.Wfm.Services.Outsource.ServiceModel
         public string Name { get; set; }
     }
 
-    [Route("/formula/{EvaluationItemId}/Linear", "PUT GET")]
     public class LinearFormula : IReturn<LinearFormula>
     {
-        public string EvaluationItemId { get; set; }
-
         public double BaseIndicator { get; set; }
         public double BaseScore { get; set; }
         public double Scale { get; set; }
@@ -98,11 +87,8 @@ namespace Grandsys.Wfm.Services.Outsource.ServiceModel
         public double DecreaseStepScore { get; set; }
     }
 
-    [Route("/formula/{EvaluationItemId}/Slide", "PUT GET")]
     public class SlideFormula : IReturn<SlideFormula>
     {
-        public string EvaluationItemId { get; set; }
-
         public double BaseIndicator { get; set; }
         public double BaseScore { get; set; }
         public double Scale { get; set; }
@@ -135,5 +121,4 @@ namespace Grandsys.Wfm.Services.Outsource.ServiceModel
         public string Denominator { get; set; }
         public string Numerator { get; set; }
     }
-
 }
