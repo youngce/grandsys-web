@@ -1,9 +1,7 @@
 ﻿using System.Collections.Generic;
 using Grandsys.Wfm.Backend.Outsource.Events;
 using Grandsys.Wfm.Services.Outsource.ServiceModel;
-using NHibernate.Dialect.Function;
 using ServiceStack.Common;
-using ServiceStack.Common.Web;
 using ServiceStack.Text;
 using EvaluationItem = Grandsys.Wfm.Backend.Outsource.Domain.EvaluationItem;
 
@@ -11,7 +9,7 @@ namespace Grandsys.Wfm.Services.Outsource.ServiceInterface
 {
     public partial class EvaluationItemService
     {
-        private IEnumerable<object> GetFormulaOptions(EvaluationItem obj)
+        private IEnumerable<string> GetFormulaOptions(EvaluationItem obj)
         {
             var defaultValue = new ParametersInfo
             {
@@ -24,19 +22,32 @@ namespace Grandsys.Wfm.Services.Outsource.ServiceInterface
                 StartIndicator = 3,
                 FinalIndicator = 14
             };
-
-            var f1 = new LinearFormula().PopulateWith(defaultValue);
-            var f2 = new SlideFormula().PopulateWith(defaultValue);
-
             if (obj.FormulaParams != null)
             {
-                f1.PopulateWith(obj.FormulaParams);
-                f2.PopulateWith(obj.FormulaParams);
+                defaultValue.PopulateWith(obj.FormulaParams);
             }
 
 
-
-            return new object[] { f1, f2 };
+            return new []
+            {
+                new
+                {
+                    defaultValue.BaseIndicator,
+                    defaultValue.BaseScore,
+                    defaultValue.Scale,
+                    defaultValue.IncreaseStepScore,
+                    defaultValue.DecreaseStepScore
+                }.ToJson(),
+                new
+                {
+                    defaultValue.BaseIndicator,
+                    defaultValue.BaseScore,
+                    defaultValue.Scale,
+                    defaultValue.StepScore,
+                    defaultValue.StartIndicator,
+                    defaultValue.FinalIndicator
+                }.ToJson()
+            };
         }
     }
 }

@@ -78,7 +78,7 @@ namespace Grandsys.Wfm.Services.Outsource.ServiceModel
         public string Name { get; set; }
     }
 
-    public class LinearFormula : IReturn<LinearFormula>
+    public class LinearFormula
     {
         public double BaseIndicator { get; set; }
         public double BaseScore { get; set; }
@@ -87,7 +87,7 @@ namespace Grandsys.Wfm.Services.Outsource.ServiceModel
         public double DecreaseStepScore { get; set; }
     }
 
-    public class SlideFormula : IReturn<SlideFormula>
+    public class SlideFormula
     {
         public double BaseIndicator { get; set; }
         public double BaseScore { get; set; }
@@ -109,7 +109,7 @@ namespace Grandsys.Wfm.Services.Outsource.ServiceModel
         //public string Formula { get; set; }
         public string FormulaParams { get; set; }
 
-        public IEnumerable<object> FormulaOptions { get; set; }
+        public IEnumerable<string> FormulaOptions { get; set; }
 
         public IEnumerable<Link> Links { get; set; }
     }
