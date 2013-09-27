@@ -52,7 +52,6 @@ namespace Grandsys.Wfm.Services.Outsource.ServiceInterface
                 Name = obj.Name,
                 StatisticalWay = obj.StatisticalWay,
                 Description = obj.Description.ToDto().ToJson(),
-                Formula = obj.Formula,
                 Status = "inuse"
             };
 
@@ -76,7 +75,7 @@ namespace Grandsys.Wfm.Services.Outsource.ServiceInterface
             }
             else if (request.Mode == "edit")
             {
-                response.SetFormulaOptions = GetFormulaOptions(obj);
+                response.FormulaOptions = GetFormulaOptions(obj);
                 response.Links = new[]
                 {
                     new Link {Name = "Update", Method = "PATCH", Request = new UpdateEvaluationItem {Id = id}},

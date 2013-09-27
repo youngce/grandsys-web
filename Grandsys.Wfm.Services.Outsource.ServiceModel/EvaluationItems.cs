@@ -106,10 +106,10 @@ namespace Grandsys.Wfm.Services.Outsource.ServiceModel
         public string StatisticalWay { get; set; } //ratio, piece
         public string Status { get; set; }
         public object Description { get; set; }
-        public string Formula { get; set; }
+        //public string Formula { get; set; }
         public string FormulaParams { get; set; }
 
-        public IEnumerable<Link> SetFormulaOptions { get; set; }
+        public IEnumerable<object> FormulaOptions { get; set; }
 
         public IEnumerable<Link> Links { get; set; }
     }

@@ -68,8 +68,10 @@ namespace Grandsys.Wfm.Backend.Outsource.Domain
         }
 
         public string Name { get { return _name; } }
+
         public string StatisticalWay { get { return _statisticalWay; } }
-        public string Formula { get; private set; }
+
+        //public string Formula { get; private set; }
 
         public object FormulaParams
         {
@@ -107,7 +109,7 @@ namespace Grandsys.Wfm.Backend.Outsource.Domain
         {
             _formula = evnt.Formula;
             _formulaParams = _formula.Parameters;
-            Formula = _formula.GetType().Name;
+            //Formula = _formula.GetType().Name;
         }
 
         public void Handle(EvaluationItemNameChanged evnt)

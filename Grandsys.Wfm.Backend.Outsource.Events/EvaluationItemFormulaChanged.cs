@@ -9,7 +9,6 @@ namespace Grandsys.Wfm.Backend.Outsource.Events
     {
         object ToValue();
         ParametersInfo Parameters { get; }
-        //IEnumerable<GradeStep> GenGradeSteps();
     }
 
     [Serializable]

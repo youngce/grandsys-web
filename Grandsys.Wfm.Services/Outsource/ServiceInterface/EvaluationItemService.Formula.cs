@@ -3,13 +3,15 @@ using Grandsys.Wfm.Backend.Outsource.Events;
 using Grandsys.Wfm.Services.Outsource.ServiceModel;
 using NHibernate.Dialect.Function;
 using ServiceStack.Common;
+using ServiceStack.Common.Web;
+using ServiceStack.Text;
 using EvaluationItem = Grandsys.Wfm.Backend.Outsource.Domain.EvaluationItem;
 
 namespace Grandsys.Wfm.Services.Outsource.ServiceInterface
 {
     public partial class EvaluationItemService
     {
-        private IEnumerable<Link> GetFormulaOptions(EvaluationItem obj)
+        private IEnumerable<object> GetFormulaOptions(EvaluationItem obj)
         {
             var defaultValue = new ParametersInfo
             {
@@ -32,23 +34,9 @@ namespace Grandsys.Wfm.Services.Outsource.ServiceInterface
                 f2.PopulateWith(obj.FormulaParams);
             }
 
-            var links = new[]
-            {
-                new Link
-                {
-                    Name = "Linear",
-                    Method = "PUT",
-                    Request = f1
-                },
-                new Link
-                {
-                    Name = "Slide",
-                    Method = "PUT",
-                    Request = f2
-                }
-            };
 
-            return links;
+
+            return new object[] { f1, f2 };
         }
     }
 }

@@ -5,6 +5,7 @@ using Autofac;
 using ENode.Autofac;
 using ENode.Domain;
 using ENode.Infrastructure;
+using Grandsys.Wfm.Backend.Outsource.Commands;
 using Grandsys.Wfm.Services.Outsource.ServiceModel;
 using NHibernate;
 using NHibernate.Cfg;
@@ -53,6 +54,9 @@ namespace Grandsys.Wfm.Services
 
         public override void Configure(Funq.Container container)
         {
+            JsConfig<SetLinearFormula>.ExcludeTypeInfo = true;
+            JsConfig<SetSlideFormula>.ExcludeTypeInfo = true;
+
             var builder = new ContainerBuilder();
 
             new NHibernateInitializer().Initialize(builder, typeof(ReadSide.Outsource.EvaluationItem).Assembly);
@@ -69,7 +73,7 @@ namespace Grandsys.Wfm.Services
 
             container.Adapter = new AutofacIocAdapter(((AutofacObjectContainer)ObjectContainer.Current).Container);
 
-            JsConfig<EvaluationItem>.ExcludeTypeInfo = true;
+            
             //Routes
             //    .Add<Note>("/hello")
             //    .Add<Note>("/hello/{Name}", "POST")

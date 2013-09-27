@@ -12,7 +12,6 @@ namespace Grandsys.Wfm.Backend.Outsource.Domain
         private  double _finalIndicator;
         private  double _stepScore;
         private  double _scale;
-        private  double _baseScore;
         private ParametersInfo _parameters;
 
         public Slide() { }
@@ -79,12 +78,12 @@ namespace Grandsys.Wfm.Backend.Outsource.Domain
         {
             return new
             {
-                BaseIndicator = _baseIndicator,
-                BaseScore = _baseScore,
-                StartIndicator = (_startIndicator - _scale),
-                FinalIndicator = _finalIndicator,
-                StepScore = _stepScore,
-                Scale = _scale
+                _parameters.BaseIndicator,
+                _parameters.BaseScore,
+                _parameters.StartIndicator,
+                _parameters.FinalIndicator ,
+                _parameters.StepScore,
+                _parameters.Scale
             };
         }
 
@@ -101,7 +100,6 @@ namespace Grandsys.Wfm.Backend.Outsource.Domain
                 _finalIndicator = value.FinalIndicator;
                 _stepScore = value.StepScore;
                 _scale = value.Scale;
-                _baseScore = value.BaseScore;
 
                 if (!IsValid())
                     throw new ArgumentException();
