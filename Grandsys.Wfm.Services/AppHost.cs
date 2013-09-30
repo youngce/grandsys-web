@@ -5,7 +5,6 @@ using Autofac;
 using ENode.Autofac;
 using ENode.Domain;
 using ENode.Infrastructure;
-using Grandsys.Wfm.Backend.Outsource.Commands;
 using Grandsys.Wfm.Services.Outsource.ServiceModel;
 using NHibernate;
 using NHibernate.Cfg;
@@ -54,8 +53,16 @@ namespace Grandsys.Wfm.Services
 
         public override void Configure(Funq.Container container)
         {
-            JsConfig<SetLinearFormula>.ExcludeTypeInfo = true;
-            JsConfig<SetSlideFormula>.ExcludeTypeInfo = true;
+        
+            JsConfig<Grandsys.Wfm.Backend.Outsource.Domain.RatioDescription>.ExcludeTypeInfo = true;
+            JsConfig<Grandsys.Wfm.Backend.Outsource.Domain.PieceDescription>.ExcludeTypeInfo = true; 
+
+            JsConfig<Grandsys.Wfm.Backend.Outsource.Domain.Linear>.ExcludeTypeInfo = true;
+            JsConfig<Grandsys.Wfm.Backend.Outsource.Domain.Slide>.ExcludeTypeInfo = true;
+
+
+            JsConfig<Grandsys.Wfm.Backend.Outsource.Domain.Slide>.ExcludePropertyNames = new[] { "Parameters" };
+            JsConfig<Grandsys.Wfm.Backend.Outsource.Domain.Linear>.ExcludePropertyNames = new[] { "Parameters" };
 
             var builder = new ContainerBuilder();
 

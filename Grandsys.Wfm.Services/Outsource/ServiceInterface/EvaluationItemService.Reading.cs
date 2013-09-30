@@ -32,7 +32,7 @@ namespace Grandsys.Wfm.Services.Outsource.ServiceInterface
             {
                 return session.QueryOver<EvaluationItem>()
                     .Future()
-                    .Select(o => new ServiceModel.EvaluationItem
+                    .Select(o => new ServiceModel.ResponseEvaluationItem
                     {
                         Id = o.Id.ToString(),
                         Name = o.Name,
@@ -46,18 +46,18 @@ namespace Grandsys.Wfm.Services.Outsource.ServiceInterface
         {
             string id = request.Id;
             var obj = _memoryCache.Get<Backend.Outsource.Domain.EvaluationItem>(new Guid(id));
-            var response = new ServiceModel.EvaluationItem
+            var response = new ServiceModel.ResponseEvaluationItem
             {
                 Id = request.Id,
                 Name = obj.Name,
                 StatisticalWay = obj.StatisticalWay,
-                Description = obj.Description.ToDto().ToJson(),
+                Description = obj.Description,
                 Status = "inuse"
             };
 
-            if (obj.FormulaParams != null)
+            if (obj.Formula != null)
             {
-                response.FormulaParams = obj.FormulaParams.ToJson();
+                response.FormulaParams = obj.Formula;
             }
 
             if (request.Mode == "read")

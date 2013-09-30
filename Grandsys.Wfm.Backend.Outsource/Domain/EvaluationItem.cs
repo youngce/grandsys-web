@@ -15,10 +15,6 @@ namespace Grandsys.Wfm.Backend.Outsource.Domain
         }
         public string Title { get; set; }
         public string Unit { get; set; }
-        public object ToDto()
-        {
-            return new { Title, Unit };
-        }
     }
 
     [Serializable]
@@ -34,10 +30,6 @@ namespace Grandsys.Wfm.Backend.Outsource.Domain
         public string Denominator { get; set; }
         public string Numerator { get; set; }
         public string Unit { get; set; }
-        public object ToDto()
-        {
-            return new {Denominator, Numerator, Unit};
-        }
     }
 
     [Serializable]
@@ -48,7 +40,6 @@ namespace Grandsys.Wfm.Backend.Outsource.Domain
     {
         private IFormula _formula;
 
-        private ParametersInfo _formulaParams;
         private bool _inuse;
         private IItemDescription _itemDescription;
         private string _name;
@@ -71,21 +62,9 @@ namespace Grandsys.Wfm.Backend.Outsource.Domain
 
         public string StatisticalWay { get { return _statisticalWay; } }
 
-        //public string Formula { get; private set; }
-
-        public object FormulaParams
-        {
-            get
-            {
-                if (_formula == null)
-                    return null;
-                return _formula.ToValue();
-            }
-        }
-
-        public ParametersInfo AllFormulaParams { get { return _formulaParams; }}
-
         public IItemDescription Description { get { return _itemDescription; } }
+
+        public IFormula Formula { get { return _formula; } }
 
         void IEventHandler<EvaluationItemAvailability>.Handle(EvaluationItemAvailability evnt)
         {
@@ -108,8 +87,6 @@ namespace Grandsys.Wfm.Backend.Outsource.Domain
         void IEventHandler<EvaluationItemFormulaChanged>.Handle(EvaluationItemFormulaChanged evnt)
         {
             _formula = evnt.Formula;
-            _formulaParams = _formula.Parameters;
-            //Formula = _formula.GetType().Name;
         }
 
         public void Handle(EvaluationItemNameChanged evnt)

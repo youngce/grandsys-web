@@ -11,7 +11,6 @@ namespace Grandsys.Wfm.Backend.Outsource.Domain
         private double _scale;
         private double _decreaseStepScore;
         private double _increaseStepScore;
-        private double _baseScore;
         private ParametersInfo _parameters;
 
 
@@ -30,19 +29,6 @@ namespace Grandsys.Wfm.Backend.Outsource.Domain
             return new[] { decreaseGradeStep, increaseGradeStep };
         }
 
-
-        public object ToValue()
-        {
-            return new
-            {
-                BaseIndicator = _baseIndicator,
-                BaseScore = _baseScore,
-                Scale = _scale,
-                DecreaseStepScore = _decreaseStepScore,
-                IncreaseStepScore = _increaseStepScore
-            };
-        }
-
         public ParametersInfo Parameters
         {
             get
@@ -55,9 +41,18 @@ namespace Grandsys.Wfm.Backend.Outsource.Domain
                 _scale = value.Scale;
                 _decreaseStepScore = value.DecreaseStepScore;
                 _increaseStepScore = value.IncreaseStepScore;
-                _baseScore = value.BaseScore;
                 _parameters = value;
             }
         }
+
+        public double BaseIndicator { get { return _parameters.BaseIndicator; } }
+        public double BaseScore { get { return _parameters.BaseScore; } }
+        public double Scale { get { return _parameters.Scale; } }
+
+        //linear
+        public double IncreaseStepScore { get { return _parameters.IncreaseStepScore; } }
+        public double DecreaseStepScore { get { return _parameters.DecreaseStepScore; } }
+
+        public string Type { get { return "linear"; } }
     }
 }

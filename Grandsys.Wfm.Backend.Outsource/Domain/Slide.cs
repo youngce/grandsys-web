@@ -7,11 +7,11 @@ namespace Grandsys.Wfm.Backend.Outsource.Domain
     [Serializable]
     public class Slide : IFormula
     {
-        private  double _baseIndicator;
-        private  double _startIndicator;
-        private  double _finalIndicator;
-        private  double _stepScore;
-        private  double _scale;
+        private double _baseIndicator;
+        private double _startIndicator;
+        private double _finalIndicator;
+        private double _stepScore;
+        private double _scale;
         private ParametersInfo _parameters;
 
         public Slide() { }
@@ -74,19 +74,6 @@ namespace Grandsys.Wfm.Backend.Outsource.Domain
             return result;
         }
 
-        public object ToValue()
-        {
-            return new
-            {
-                _parameters.BaseIndicator,
-                _parameters.BaseScore,
-                _parameters.StartIndicator,
-                _parameters.FinalIndicator ,
-                _parameters.StepScore,
-                _parameters.Scale
-            };
-        }
-
         public ParametersInfo Parameters
         {
             get
@@ -106,5 +93,16 @@ namespace Grandsys.Wfm.Backend.Outsource.Domain
                 _parameters = value;
             }
         }
+
+        public double BaseIndicator { get { return _parameters.BaseIndicator; } }
+        public double BaseScore { get { return _parameters.BaseScore; } }
+        public double Scale { get { return _parameters.Scale; } }
+        //slide
+        public double StepScore { get { return _parameters.StepScore; } }
+        public double StartIndicator { get { return _parameters.StartIndicator; } }
+        public double FinalIndicator { get { return _parameters.FinalIndicator; } }
+
+        public string Type { get { return "slide"; }}
+        
     }
 }

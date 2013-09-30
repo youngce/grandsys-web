@@ -9,7 +9,7 @@ namespace Grandsys.Wfm.Services.Outsource.ServiceInterface
 {
     public partial class EvaluationItemService
     {
-        private IEnumerable<string> GetFormulaOptions(EvaluationItem obj)
+        private IEnumerable<object> GetFormulaOptions(EvaluationItem obj)
         {
             var defaultValue = new ParametersInfo
             {
@@ -22,32 +22,20 @@ namespace Grandsys.Wfm.Services.Outsource.ServiceInterface
                 StartIndicator = 3,
                 FinalIndicator = 14
             };
-            if (obj.FormulaParams != null)
+
+            var formulas = new object[]
             {
-                defaultValue.PopulateWith(obj.FormulaParams);
+                new Backend.Outsource.Domain.Linear(defaultValue),
+                new Backend.Outsource.Domain.Slide(defaultValue)
+            };
+
+            for (var i = 0; i < formulas.Length; i++)
+            {
+                if (formulas[i].GetType() == obj.Formula.GetType())
+                    formulas[i] = obj.Formula;
             }
 
-
-            return new []
-            {
-                new
-                {
-                    defaultValue.BaseIndicator,
-                    defaultValue.BaseScore,
-                    defaultValue.Scale,
-                    defaultValue.IncreaseStepScore,
-                    defaultValue.DecreaseStepScore
-                }.ToJson(),
-                new
-                {
-                    defaultValue.BaseIndicator,
-                    defaultValue.BaseScore,
-                    defaultValue.Scale,
-                    defaultValue.StepScore,
-                    defaultValue.StartIndicator,
-                    defaultValue.FinalIndicator
-                }.ToJson()
-            };
+            return formulas;
         }
     }
 }

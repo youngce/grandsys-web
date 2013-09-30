@@ -27,7 +27,7 @@ namespace Grandsys.Wfm.Services.Outsource.ServiceInterface
 
             var id = evaluationItemId.ToString();
 
-            return new EvaluationItem
+            return new ResponseEvaluationItem
             {
                 Id = id,
                 Name = request.Name,
@@ -43,7 +43,7 @@ namespace Grandsys.Wfm.Services.Outsource.ServiceInterface
 
             var id = evaluationItemId.ToString();
 
-            return new EvaluationItem
+            return new ResponseEvaluationItem
             {
                 Id = id,
                 Name = request.Name,

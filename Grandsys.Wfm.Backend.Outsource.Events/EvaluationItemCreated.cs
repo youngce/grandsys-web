@@ -68,6 +68,6 @@ namespace Grandsys.Wfm.Backend.Outsource.Events
 
     public interface IItemDescription
     {
-        object ToDto();
+        
     }
 }

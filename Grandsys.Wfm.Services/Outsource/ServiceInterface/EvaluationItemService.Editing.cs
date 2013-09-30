@@ -81,7 +81,7 @@ namespace Grandsys.Wfm.Services.Outsource.ServiceInterface
                 });
             if (result.IsCompleted)
             {
-                return new EvaluationItem
+                return new ResponseEvaluationItem
                 {
                     Id = request.Id,
                     Name = request.Name,
