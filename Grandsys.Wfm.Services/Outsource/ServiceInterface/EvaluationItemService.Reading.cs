@@ -2,13 +2,10 @@
 using System.Linq;
 using ENode.Commanding;
 using ENode.Domain;
+using Grandsys.Wfm.ReadSide.Outsource;
 using Grandsys.Wfm.Services.Outsource.ServiceModel;
 using NHibernate;
-using ServiceStack.Common;
-using ServiceStack.Common.Web;
 using ServiceStack.ServiceInterface;
-using ServiceStack.Text;
-using EvaluationItem = Grandsys.Wfm.ReadSide.Outsource.EvaluationItem;
 
 namespace Grandsys.Wfm.Services.Outsource.ServiceInterface
 {
@@ -32,7 +29,7 @@ namespace Grandsys.Wfm.Services.Outsource.ServiceInterface
             {
                 return session.QueryOver<EvaluationItem>()
                     .Future()
-                    .Select(o => new ServiceModel.ResponseEvaluationItem
+                    .Select(o => new ResponseEvaluationItem
                     {
                         Id = o.Id.ToString(),
                         Name = o.Name,
@@ -46,7 +43,7 @@ namespace Grandsys.Wfm.Services.Outsource.ServiceInterface
         {
             string id = request.Id;
             var obj = _memoryCache.Get<Backend.Outsource.Domain.EvaluationItem>(new Guid(id));
-            var response = new ServiceModel.ResponseEvaluationItem
+            var response = new ResponseEvaluationItem
             {
                 Id = request.Id,
                 Name = obj.Name,
