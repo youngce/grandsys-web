@@ -43,17 +43,26 @@
     <Reference Include="Autofac">
       <HintPath>..\packages\Autofac.3.1.1\lib\net40\Autofac.dll</HintPath>
     </Reference>
+    <Reference Include="ENode, Version=1.2.6.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\ENodeX.1.2.6.1\lib\net40\ENode.dll</HintPath>
+    </Reference>
     <Reference Include="ENode.Autofac">
       <HintPath>..\packages\ENodeX.Autofac.1.0.1.0\lib\net40\ENode.Autofac.dll</HintPath>
     </Reference>
     <Reference Include="ENode.JsonNet">
       <HintPath>..\packages\ENodeX.JsonNet.1.0.1.0\lib\net40\ENode.JsonNet.dll</HintPath>
     </Reference>
-    <Reference Include="ENode.Log4Net">
+    <Reference Include="ENode.Log4Net, Version=1.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\ENodeX.Log4Net.1.0.1.0\lib\net40\ENode.Log4Net.dll</HintPath>
     </Reference>
     <Reference Include="Iesi.Collections">
       <HintPath>..\packages\Iesi.Collections.3.2.0.4000\lib\Net35\Iesi.Collections.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net, Version=1.2.12.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\log4net.2.0.1\lib\net40-full\log4net.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
@@ -105,6 +114,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
+    <Content Include="SqlScripts\TableGenerateSQL.sql" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -162,7 +172,7 @@
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>35138</DevelopmentServerPort>
+          <DevelopmentServerPort>64911</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>
           </IISUrl>
