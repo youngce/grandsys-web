@@ -19,7 +19,7 @@ namespace Grandsys.Wfm.Backend.Outsource.Events
     }
 
     [Serializable]
-    public class ParametersInfo
+    public struct ParametersInfo
     {
         public double BaseIndicator { get; set; }
         public double BaseScore { get; set; }

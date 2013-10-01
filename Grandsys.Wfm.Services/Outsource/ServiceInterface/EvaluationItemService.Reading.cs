@@ -72,7 +72,7 @@ namespace Grandsys.Wfm.Services.Outsource.ServiceInterface
             }
             else if (request.Mode == "edit")
             {
-                response.FormulaOptions = GetFormulaOptions(obj);
+                response.FormulaOptions = GetFormulaOptions(obj.Formula);
                 response.Links = new[]
                 {
                     new Link {Name = "Update", Method = "PATCH", Request = new UpdateEvaluationItem {Id = id}},

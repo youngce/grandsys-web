@@ -9,7 +9,7 @@ namespace Grandsys.Wfm.Services.Outsource.ServiceInterface
 {
     public partial class EvaluationItemService
     {
-        private IEnumerable<object> GetFormulaOptions(EvaluationItem obj)
+        private IEnumerable<object> GetFormulaOptions(IFormula formula)
         {
             var defaultValue = new ParametersInfo
             {
@@ -29,11 +29,12 @@ namespace Grandsys.Wfm.Services.Outsource.ServiceInterface
                 new Backend.Outsource.Domain.Slide(defaultValue)
             };
 
-            for (var i = 0; i < formulas.Length; i++)
-            {
-                if (formulas[i].GetType() == obj.Formula.GetType())
-                    formulas[i] = obj.Formula;
-            }
+            if (formula != null)
+                for (var i = 0; i < formulas.Length; i++)
+                {
+                    if (formulas[i].GetType() == formula.GetType())
+                        formulas[i] = formula;
+                }
 
             return formulas;
         }
