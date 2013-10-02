@@ -40,13 +40,38 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Autofac">
+    <Reference Include="Autofac, Version=3.0.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Autofac.3.1.1\lib\net40\Autofac.dll</HintPath>
+    </Reference>
+    <Reference Include="ENode, Version=1.2.7.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\ENode.1.2.7.0\lib\net40\ENode.dll</HintPath>
+    </Reference>
+    <Reference Include="ENode.Autofac, Version=1.0.1.1, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\enode.autofac.1.0.1.1\lib\net40\ENode.Autofac.dll</HintPath>
+    </Reference>
+    <Reference Include="ENode.JsonNet, Version=1.0.1.1, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\enode.jsonnet.1.0.1.1\lib\net40\ENode.JsonNet.dll</HintPath>
+    </Reference>
+    <Reference Include="ENode.Log4Net, Version=1.0.1.1, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\enode.log4net.1.0.1.1\lib\net40\ENode.Log4Net.dll</HintPath>
     </Reference>
     <Reference Include="Iesi.Collections">
       <HintPath>..\packages\Iesi.Collections.3.2.0.4000\lib\Net35\Iesi.Collections.dll</HintPath>
     </Reference>
+    <Reference Include="log4net, Version=1.2.12.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\log4net.2.0.1\lib\net40-full\log4net.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.4.5.11\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="NHibernate">
       <HintPath>..\packages\NHibernate.3.3.3.4001\lib\Net35\NHibernate.dll</HintPath>
     </Reference>
@@ -107,6 +132,7 @@
     <Compile Include="Outsource\ServiceInterface\EvaluationItemService.Formula.cs" />
     <Compile Include="Outsource\ServiceInterface\EvaluationItemService.Creation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\AssemblyInfo.log4net.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -120,26 +146,6 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <ProjectReference Include="..\enode\src\ENode\ENode.csproj">
-      <Project>{f884f01a-ed67-4f21-8576-fd2588491b24}</Project>
-      <Name>ENode</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\enode\src\Extensions\ENode.Autofac\ENode.Autofac.csproj">
-      <Project>{b4258b15-71b1-4b3b-960a-6a1c75ca2004}</Project>
-      <Name>ENode.Autofac</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\enode\src\Extensions\ENode.JsonNet\ENode.JsonNet.csproj">
-      <Project>{92b95148-23f9-4aa8-b5dd-fcbde0e0eb88}</Project>
-      <Name>ENode.JsonNet</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\enode\src\Extensions\ENode.Log4Net\ENode.Log4Net.csproj">
-      <Project>{0f063898-fb02-47d9-b6c6-7a4cfe4b6c51}</Project>
-      <Name>ENode.Log4Net</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\enode\src\Samples\NoteSample\NoteSample.csproj">
-      <Project>{0f069e27-c089-4ef1-b466-84c78eba83ad}</Project>
-      <Name>NoteSample</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Grandsys.Wfm.Backend.Outsource.Events\Grandsys.Wfm.Backend.Outsource.Events.csproj">
       <Project>{4396533a-e7f5-4ce7-98d6-adec97db3074}</Project>
       <Name>Grandsys.Wfm.Backend.Outsource.Events</Name>

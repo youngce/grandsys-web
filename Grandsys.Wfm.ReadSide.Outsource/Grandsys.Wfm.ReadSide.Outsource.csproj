@@ -32,6 +32,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ENode, Version=1.2.7.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\ENode.1.2.7.0\lib\net40\ENode.dll</HintPath>
+    </Reference>
     <Reference Include="Iesi.Collections">
       <HintPath>..\packages\Iesi.Collections.3.2.0.4000\lib\Net35\Iesi.Collections.dll</HintPath>
     </Reference>
@@ -51,10 +55,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\enode\src\ENode\ENode.csproj">
-      <Project>{f884f01a-ed67-4f21-8576-fd2588491b24}</Project>
-      <Name>ENode</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Grandsys.Wfm.Backend.Outsource.Events\Grandsys.Wfm.Backend.Outsource.Events.csproj">
       <Project>{4396533a-e7f5-4ce7-98d6-adec97db3074}</Project>
       <Name>Grandsys.Wfm.Backend.Outsource.Events</Name>
