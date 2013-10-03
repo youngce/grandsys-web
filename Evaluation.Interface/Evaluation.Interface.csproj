@@ -4,15 +4,13 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{4396533A-E7F5-4CE7-98D6-ADEC97DB3074}</ProjectGuid>
+    <ProjectGuid>{CA6C2FB7-95B8-48CF-9A4A-B434470E1CB1}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Grandsys.Wfm.Backend.Outsource.Events</RootNamespace>
-    <AssemblyName>Grandsys.Wfm.Backend.Outsource.Events</AssemblyName>
+    <RootNamespace>Grandsys.Wfm.Backend.Outsource.Interface</RootNamespace>
+    <AssemblyName>Evaluation.Interface</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
-    <RestorePackages>true</RestorePackages>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -32,10 +30,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="ENode, Version=1.2.7.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\ENode.1.2.7.0\lib\net40\ENode.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -45,21 +39,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="EvaluationItemCreated.cs" />
-    <Compile Include="EvaluationItemFormulaChanged.cs" />
+    <Compile Include="GradeStep.cs" />
+    <Compile Include="IFormula.cs" />
+    <Compile Include="LessThanOrEqualToZeroException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Evaluation.Interface\Evaluation.Interface.csproj">
-      <Project>{CA6C2FB7-95B8-48CF-9A4A-B434470E1CB1}</Project>
-      <Name>Evaluation.Interface</Name>
-    </ProjectReference>
+    <Compile Include="Range.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

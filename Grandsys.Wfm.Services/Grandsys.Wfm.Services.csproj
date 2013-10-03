@@ -146,6 +146,10 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <ProjectReference Include="..\Evaluation.Interface\Evaluation.Interface.csproj">
+      <Project>{ca6c2fb7-95b8-48cf-9a4a-b434470e1cb1}</Project>
+      <Name>Evaluation.Interface</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Grandsys.Wfm.Backend.Outsource.Events\Grandsys.Wfm.Backend.Outsource.Events.csproj">
       <Project>{4396533a-e7f5-4ce7-98d6-adec97db3074}</Project>
       <Name>Grandsys.Wfm.Backend.Outsource.Events</Name>

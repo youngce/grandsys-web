@@ -2,6 +2,7 @@
 using ENode.Domain;
 using ENode.Eventing;
 using Grandsys.Wfm.Backend.Outsource.Events;
+using Grandsys.Wfm.Backend.Outsource.Interface;
 
 namespace Grandsys.Wfm.Backend.Outsource.Domain
 {

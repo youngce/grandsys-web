@@ -4,6 +4,7 @@ using ENode.Infrastructure;
 using Grandsys.Wfm.Backend.Outsource.Commands;
 using Grandsys.Wfm.Backend.Outsource.Domain;
 using Grandsys.Wfm.Backend.Outsource.Events;
+using Grandsys.Wfm.Backend.Outsource.Interface;
 
 namespace Grandsys.Wfm.Backend.Outsource.CommandHandlers
 {

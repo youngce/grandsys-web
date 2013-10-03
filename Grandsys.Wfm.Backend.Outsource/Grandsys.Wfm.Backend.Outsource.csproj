@@ -49,16 +49,16 @@
     <Compile Include="Commands\CreateEvaluationItem.cs" />
     <Compile Include="Commands\UpdateEvaluationItem.cs" />
     <Compile Include="Domain\EvaluationItem.cs" />
-    <Compile Include="Domain\GradeStep.cs" />
-    <Compile Include="Domain\LessThanOrEqualToZeroException.cs" />
     <Compile Include="Domain\Linear.cs" />
-    <Compile Include="Domain\NonOverlappingGradeSteps.cs" />
-    <Compile Include="Domain\Range.cs" />
     <Compile Include="Domain\Slide.cs" />
     <Compile Include="Domain\StatisticalWay.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Evaluation.Interface\Evaluation.Interface.csproj">
+      <Project>{ca6c2fb7-95b8-48cf-9a4a-b434470e1cb1}</Project>
+      <Name>Evaluation.Interface</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Grandsys.Wfm.Backend.Outsource.Events\Grandsys.Wfm.Backend.Outsource.Events.csproj">
       <Project>{4396533a-e7f5-4ce7-98d6-adec97db3074}</Project>
       <Name>Grandsys.Wfm.Backend.Outsource.Events</Name>

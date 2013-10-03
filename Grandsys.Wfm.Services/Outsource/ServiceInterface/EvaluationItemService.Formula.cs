@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Grandsys.Wfm.Backend.Outsource.Events;
+using Grandsys.Wfm.Backend.Outsource.Interface;
 using Grandsys.Wfm.Services.Outsource.ServiceModel;
 using ServiceStack.Common;
 using ServiceStack.Text;
