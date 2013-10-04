@@ -4,6 +4,7 @@ using System.Linq;
 using ENode.Domain;
 using ENode.Eventing;
 using Grandsys.Wfm.Backend.Outsource.Events;
+using Grandsys.Wfm.Backend.Outsource.Interface;
 
 namespace Grandsys.Wfm.Backend.Outsource.Domain
 {
@@ -11,12 +12,18 @@ namespace Grandsys.Wfm.Backend.Outsource.Domain
     public class FormItem
     {
         private NonOverlappingGradeSteps _gradeSteps;
+        private Range<double> _scoreRange;
+        private double _weightRaio;
+
 
         public FormItem(){}
 
         public FormItem(EvaluationItemValue value)
         {
-           _gradeSteps = new NonOverlappingGradeSteps(value.Formula.GenGradeSteps());
+            _gradeSteps = new NonOverlappingGradeSteps(value.Formula.GenGradeSteps());
+            
+            
+
         }
     }
 

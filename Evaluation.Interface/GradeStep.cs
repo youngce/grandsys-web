@@ -5,6 +5,7 @@ namespace Grandsys.Wfm.Backend.Outsource.Interface
     [Serializable]
     public class GradeStep
     {
+        public Range<double> Range{get { return _range; }} 
         private readonly Range<double> _range;
         private double _scale;
 

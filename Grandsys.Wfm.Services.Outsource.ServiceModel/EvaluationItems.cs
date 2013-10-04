@@ -32,7 +32,7 @@ namespace Grandsys.Wfm.Services.Outsource.ServiceModel
     }
 
     [Route("/evaluationItems/{Id}", "PUT PATCH")]
-    public class UpdateEvaluationItem : IReturn
+    public class UpdateEvaluationItem : IReturn<ResponseEvaluationItem>
     {
         public string Id { get; set; }
         public string Name { get; set; }
